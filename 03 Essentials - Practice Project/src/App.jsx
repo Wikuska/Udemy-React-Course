@@ -24,8 +24,12 @@ function App() {
   return (
     <>
       <Header />
-      <UserInput onInputChange={handleChange} userInput={userInput}/>
-      <Results userInput={userInput}/>
+      <UserInput onInputChange={handleChange} userInput={userInput} />
+      {userInput.duration > 0 ? (
+        <Results userInput={userInput} />
+      ) : (
+        <p className="center">Please enter valid input</p>
+      )}
     </>
   );
 }
