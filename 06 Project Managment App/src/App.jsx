@@ -1,8 +1,12 @@
+import ProjectSidebar from "./components/ProjectsSidebar";
+import NoProjectSelected from "./components/NoProjectSelected";
+
 function App() {
   return (
-    <>
-      <h1 className="my-8 text-center text-5xl font-bold">Hello World</h1>
-    </>
+    <div class="flex flex-row mt-5">
+      <ProjectSidebar/>
+      <NoProjectSelected/>
+    </div>
   );
 }
 
