@@ -1,11 +1,13 @@
 import ProjectSidebar from "./components/ProjectsSidebar";
 import NoProjectSelected from "./components/NoProjectSelected";
+import NewProject from "./components/NewProject";
 
 function App() {
   return (
-    <div class="flex flex-row mt-5">
+    <div className="flex flex-row mt-5">
       <ProjectSidebar/>
-      <NoProjectSelected/>
+      {/* <NoProjectSelected/> */}
+      <NewProject/>
     </div>
   );
 }
