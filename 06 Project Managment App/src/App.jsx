@@ -4,24 +4,46 @@ import NoProjectSelected from "./components/NoProjectSelected";
 import NewProject from "./components/NewProject";
 
 function App() {
-  const [openTab, setOpenTab] = useState("noProject")
+  const [projectState, setProjectState] = useState({
+    selectedProjectId: undefined,
+    projects: []
+  })
 
-  let nowOpen = null;
-
-  if (openTab == "noProject") {
-    nowOpen = <NoProjectSelected onClick={onTabChange} />
+  function handleStartAddProject() {
+    setProjectState(prevState => {
+      return {
+        ...prevState,
+        selectedProjectId: null
+      };
+    });
   }
-  else if (openTab == "newProject") {
-    nowOpen = <NewProject onClick={onTabChange} />
-  }
 
-  function onTabChange(tabToOpen) {
-    setOpenTab(tabToOpen)
+  function handleAddProject(projectData) {
+    setProjectState(prevState => {
+      const newProject = {
+        ...projectData,
+        id: Math.random()
+      }
+
+      return {
+        ...prevState,
+        projects: [...prevState.projects, newProject]
+      };
+    });
+  }
+  
+  let nowOpen;
+
+  if (projectState.selectedProjectId === undefined) {
+    nowOpen = <NoProjectSelected onStartAddProject={handleStartAddProject} />
+  }
+  else if (projectState.selectedProjectId === null) {
+    nowOpen = <NewProject onAdd={handleAddProject} />
   }
 
   return (
     <div className="flex flex-row mt-5">
-      <ProjectSidebar onClick={onTabChange} />
+      <ProjectSidebar onStartAddProject={handleStartAddProject} />
       {nowOpen}
     </div>
   );
