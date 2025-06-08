@@ -1,17 +1,25 @@
 export default function ProjectSidebar({ onStartAddProject, projects }) {
   return (
-    <aside className="flex flex-col basis-1/5 bg-pink-500 rounded-r-lg min-h-[calc(100vh-2.5rem)] items-center">
-      <h1 className="pt-10 font-semibold text-white text-lg">YOUR PROJECTS</h1>
-      <button
-        onClick={onStartAddProject}
-        className="bg-green-500 mt-8 p-2 rounded-lg hover:bg-emerald-500"
-      >
-        + Add Projects
-      </button>
+    <aside className="w-1/3 px-8 py-16 bg-stone-900 text-stone-50 md:w-72 rounded-r-xl">
+      <h2 className="mb-8 font-bold uppercase md:text-xl text-stone-200">
+        Your projects
+      </h2>
+      <div>
+        <button
+          className="px-4 py-2 text-xs md:text-base rounded-md bg-stone-700 text-stone-400 hover:bg-stone-600 hover:text-stone-100"
+          onClick={onStartAddProject}
+        >
+          + Add Projects
+        </button>
+      </div>
       <ul className="mt-8">
-        {projects.map(project => <li key={project.id}>
-            <button className="w-full text-left px-2 py-1 rounded-sm my-1 text-white hover:text-stone-200 hover:bg-pink-400">{project.title}</button>
-        </li>)}
+        {projects.map((project) => (
+          <li key={project.id}>
+            <button className="w-full text-left px-2 py-1 rounded-sm my-1 text-white hover:text-stone-200 hover:bg-stone-700">
+              {project.title}
+            </button>
+          </li>
+        ))}
       </ul>
     </aside>
   );

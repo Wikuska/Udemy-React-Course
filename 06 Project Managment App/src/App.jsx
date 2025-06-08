@@ -42,13 +42,13 @@ function App() {
   }
 
   return (
-    <div className="flex flex-row mt-5">
+    <main className="h-screen my-8 flex gap-8">
       <ProjectSidebar
         onStartAddProject={handleStartAddProject}
         projects={projectState.projects}
       />
       {nowOpen}
-    </div>
+    </main>
   );
 }
 
