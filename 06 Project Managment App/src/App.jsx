@@ -6,44 +6,47 @@ import NewProject from "./components/NewProject";
 function App() {
   const [projectState, setProjectState] = useState({
     selectedProjectId: undefined,
-    projects: []
-  })
+    projects: [],
+  });
 
   function handleStartAddProject() {
-    setProjectState(prevState => {
+    setProjectState((prevState) => {
       return {
         ...prevState,
-        selectedProjectId: null
+        selectedProjectId: null,
       };
     });
   }
 
   function handleAddProject(projectData) {
-    setProjectState(prevState => {
+    setProjectState((prevState) => {
       const newProject = {
         ...projectData,
-        id: Math.random()
-      }
+        id: Math.random(),
+      };
 
       return {
         ...prevState,
-        projects: [...prevState.projects, newProject]
+        selectedProjectId: undefined,
+        projects: [...prevState.projects, newProject],
       };
     });
   }
-  
+
   let nowOpen;
 
   if (projectState.selectedProjectId === undefined) {
-    nowOpen = <NoProjectSelected onStartAddProject={handleStartAddProject} />
-  }
-  else if (projectState.selectedProjectId === null) {
-    nowOpen = <NewProject onAdd={handleAddProject} />
+    nowOpen = <NoProjectSelected onStartAddProject={handleStartAddProject} />;
+  } else if (projectState.selectedProjectId === null) {
+    nowOpen = <NewProject onAdd={handleAddProject} />;
   }
 
   return (
     <div className="flex flex-row mt-5">
-      <ProjectSidebar onStartAddProject={handleStartAddProject} />
+      <ProjectSidebar
+        onStartAddProject={handleStartAddProject}
+        projects={projectState.projects}
+      />
       {nowOpen}
     </div>
   );
