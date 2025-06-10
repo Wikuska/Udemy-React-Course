@@ -52,14 +52,35 @@ function App() {
     });
   }
 
-  const currentProject = projectState.projects.find(project => project.id === projectState.selectedProjectId);
+  function handleDeleteProject() {
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectId: undefined,
+        projects: prevState.projects.filter(
+          (project) => project.id !== prevState.selectedProjectId
+        ),
+      };
+    });
+  }
 
-  let nowOpen = <SelectedProject projectData={currentProject}/>;
+  const currentProject = projectState.projects.find(
+    (project) => project.id === projectState.selectedProjectId
+  );
+
+  let nowOpen = (
+    <SelectedProject
+      projectData={currentProject}
+      onDelete={handleDeleteProject}
+    />
+  );
 
   if (projectState.selectedProjectId === undefined) {
     nowOpen = <NoProjectSelected onStartAddProject={handleStartAddProject} />;
   } else if (projectState.selectedProjectId === null) {
-    nowOpen = <NewProject onAdd={handleAddProject} onCancel={handleCancelAddProject}/>;
+    nowOpen = (
+      <NewProject onAdd={handleAddProject} onCancel={handleCancelAddProject} />
+    );
   }
 
   return (
