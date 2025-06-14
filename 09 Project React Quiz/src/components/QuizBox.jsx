@@ -1,52 +1,35 @@
 import { useEffect, useState } from "react";
-import Answer from "./Answer";
 import Question from "./Question";
-import questions from "../../questions";
+import QUESTIONS from "../../questions";
+import Summary from "./Summary";
 
 export default function QuizBox() {
-  const [currentQuestionId, setCurrentQuestionId] = useState(0);
   const [userAnswers, setUserAnswers] = useState([]);
 
-  useEffect(() => {
-    console.log(userAnswers);
-  }, [userAnswers]);
+  const currentQuestionIndex = userAnswers.length;
+  const currentQuestion = QUESTIONS[currentQuestionIndex];
+  const quizIsComplete = currentQuestionIndex === QUESTIONS.length;
 
-  useEffect(() => {
-    console.log(currentQuestionId);
-  }, [currentQuestionId]);
-
-  const currentQuestion = questions[currentQuestionId];
-
-  function onChooseAnswer(answerIndex) {
+  function handleChooseAnswer(selectedAnswer) {
     setUserAnswers((prevAnswers) => {
-      return {
-        ...prevAnswers,
-        [currentQuestion.id]: answerIndex,
-      };
+      return [...prevAnswers, selectedAnswer];
     });
-    setCurrentQuestionId((prevId) => {
-      if (questions.length - 1 > prevId) {
-        return prevId + 1;
-      } else {
-        console.log("game ends")
-        return prevId
-      }
-    });
+  }
+
+  if (quizIsComplete) {
+    return <Summary />;
   }
 
   return (
     <div id="quiz">
       <Question text={currentQuestion.text} />
-      <div id="answers">
-        {currentQuestion.answers.map((answer, index) => (
-          <Answer
-            key={index}
-            answerText={answer}
-            onClick={onChooseAnswer}
-            index={index}
-          />
+      <ul id="answers">
+        {currentQuestion.answers.map((answer) => (
+          <li key={answer} className="answer">
+            <button onClick={() => handleChooseAnswer(answer)}>{answer}</button>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }
