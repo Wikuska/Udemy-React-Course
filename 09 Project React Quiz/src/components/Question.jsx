@@ -1,8 +1,8 @@
-export default function Question(){
-    return (
-        <div id="question">
-            <progress></progress>
-            <h2>Some question</h2>
-        </div>
-    )
+export default function Question({text}) {
+  return (
+    <div id="question">
+      <progress></progress>
+      <h2>{text}</h2>
+    </div>
+  );
 }

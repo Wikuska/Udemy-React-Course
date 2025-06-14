@@ -1,7 +1,7 @@
-export default function Answer({ children }) {
+export default function Answer({ answerText, onClick, index }) {
   return (
     <div className="answer">
-      <button>{children}</button>
+      <button onClick={() => onClick(index)}>{answerText}</button>
     </div>
   );
 }
