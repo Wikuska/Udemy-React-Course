@@ -8,8 +8,6 @@ export default function QuizBox() {
 
   const currentQuestionIndex = userAnswers.length;
   const currentQuestion = QUESTIONS[currentQuestionIndex];
-  const shuffledAnswers = [...QUESTIONS[currentQuestionIndex].answers];
-  shuffledAnswers.sort(() => Math.random() - 0.5);
   const quizIsComplete = currentQuestionIndex === QUESTIONS.length;
 
   const handleChooseAnswer = useCallback(function handleChooseAnswer(
@@ -29,10 +27,17 @@ export default function QuizBox() {
     return <Summary />;
   }
 
+  const shuffledAnswers = [...QUESTIONS[currentQuestionIndex].answers];
+  shuffledAnswers.sort(() => Math.random() - 0.5);
+
   return (
     <div id="quiz">
       <div id="questions">
-        <QuestionTimer timeout={10000} onTimeout={handleSkipAnswer} />
+        <QuestionTimer
+          key={currentQuestionIndex}
+          timeout={10000}
+          onTimeout={handleSkipAnswer}
+        />
         <h2>{currentQuestion.text}</h2>
         <ul id="answers">
           {shuffledAnswers.map((answer) => (
