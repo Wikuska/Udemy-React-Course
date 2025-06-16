@@ -23,7 +23,7 @@ export default function QuizBox() {
   }, []);
 
   if (quizIsComplete) {
-    return <Summary />;
+    return <Summary userAnswers={userAnswers}/>;
   }
 
   return (
