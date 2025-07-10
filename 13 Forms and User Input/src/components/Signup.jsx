@@ -6,6 +6,8 @@ export default function Signup() {
     const acquisitionChannel = formData.getAll("acquisition") // Multivalue input fields must be read manually
     const data = Object.fromEntries(formData.entries()); // Creates key value pairs field:submittedValue
     data.acquisition = acquisitionChannel; // Add manually to data object
+
+    event.target.reset();
   }
 
   return (

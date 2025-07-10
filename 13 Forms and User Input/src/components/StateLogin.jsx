@@ -4,19 +4,24 @@ export default function Login() {
   // const [enteredEmail, setEnteredEmail] = useState("");
   // const [enteredPassword, setEnteredPassword] = useState("");
   const [enteredValues, setEnteredValues] = useState({
-    email: '',
-    password: ''
-  })
+    email: "",
+    password: "",
+  });
 
   function handleSubmit(event) {
     event.preventDefault();
+
+    setEnteredValues({
+      email: "",
+      password: "",
+    });
   }
 
   function handleInputChange(identifier, event) {
-    setEnteredValues(prevValues => ({
+    setEnteredValues((prevValues) => ({
       ...prevValues,
-      [identifier]: event.target.value
-    }))
+      [identifier]: event.target.value,
+    }));
   }
 
   // function handleEmailChange(event) {
