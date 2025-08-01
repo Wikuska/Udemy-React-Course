@@ -13,13 +13,11 @@ export default function Meals() {
     fetchMeals();
   }, []);
 
-  console.log(meals);
-
   return (
-    <div id="meals">
+    <ul id="meals">
       {meals.map((meal) => (
-        <MealItem meal={meal} />
+        <MealItem key={meal.id} meal={meal} />
       ))}
-    </div>
+    </ul>
   );
 }
